@@ -2,8 +2,3 @@ This is a node demo project.
 include the next modules
 first-demo
 express-demo
-
-
-If you want to run each modules, please follow the next steps:
-1. npm install
-2. node index.js 
