@@ -1,5 +1,9 @@
-This is a nodejs demo project.
+This is a node demo project.
+include the next modules
+first-demo
+express-demo
 
-If you want to run this project, please follow the next steps:
-1. npm install formidable
+
+If you want to run each modules, please follow the next steps:
+1. npm install
 2. node index.js 
