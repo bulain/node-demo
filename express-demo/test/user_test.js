@@ -86,7 +86,7 @@ describe('user', function() {
   describe('#destory', function() {
     it('should success when delete user', function(done) {
       var user = new User();
-      user.id = 1;
+      user.id = 3;
       user.destory(function(err, results) {
         if (err)
           return done(err);
