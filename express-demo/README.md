@@ -1,22 +1,21 @@
 This is express demo project.
 
-*node modules:
+###node modules:
 
-0. express
-0. ejs
-0. mysql
-0. mongodb
-0. mocha
-0. async
+* express
+* ejs
+* mysql
+* mongodb
+* mocha
+* async
 
-*js framework
+###js framework
 
-0. jquery
+* jquery
 
-*css framework
+###css framework
 
-0. bootstrap
-
+* bootstrap
 
 If you want to run this project, please follow the next steps:
 
