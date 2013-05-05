@@ -5,12 +5,12 @@ exports.list = function(req, res){
   user.list(function(err, rows) {
     if (err)
       req.flash('error', err);
-    res.render('list', { title: 'User List', users: rows });
+    res.render('user/list', { title: 'User List', users: rows });
   });
 };
 exports.new = function(req, res){
   var user = new User();
-  res.render('new', { title: 'New User', user: user });
+  res.render('user/new', { title: 'New User', user: user });
 };
 exports.create = function(req, res){
   var user = new User();
@@ -19,7 +19,7 @@ exports.create = function(req, res){
   user.create(function(err, results) {
     if (err){
       req.flash('error', err);
-      res.render('new', { title: 'New User', user: user });
+      res.render('user/new', { title: 'New User', user: user });
     }
     res.redirect('/users'); 
   });
@@ -30,7 +30,7 @@ exports.edit = function(req, res){
   user.get(function(err, rows) {
     if (err)
       req.flash('error', err);
-    res.render('edit', { title: 'Edit User', user: rows[0] });
+    res.render('user/edit', { title: 'Edit User', user: rows[0] });
   });
 };
 exports.update = function(req, res){
@@ -41,7 +41,7 @@ exports.update = function(req, res){
   user.update(function(err, results) {
     if (err){
       req.flash('error', err);
-      res.render('edit', { title: 'Edit User', user: user });
+      res.render('user/edit', { title: 'Edit User', user: user });
     }
     res.redirect('/users'); 
   });
