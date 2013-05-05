@@ -41,33 +41,29 @@ describe('User API', function() {
       });
     });
   });
-  describe('GET /users', function() {
-    it('GET /users should return 200', function(done) {
+  describe('GET', function() {
+    it('/users should return 200', function(done) {
       request(app).get('/users').expect(200, done);
     });
-  });
-  describe('GET /users/new', function() {
-    it('GET /users/new should return 200', function(done) {
+    it('/users/new should return 200', function(done) {
       request(app).get('/users/new').expect(200, done);
     });
-  });
-  describe('PUT /users', function() {
-    it('PUT /users should return 302', function(done) {
-      request(app).put('/users').expect(302, done);
-    });
-  });
-  describe('GET /users/:id', function() {
-    it('GET /users/1 should return 200', function(done) {
+    it('/users/1 should return 200', function(done) {
       request(app).get('/users/1').expect(200, done);
     });
   });
-  describe('POST /users/:id', function() {
-    it('POST /users/1 should return 302', function(done) {
+  describe('PUT', function() {
+    it('/users should return 302', function(done) {
+      request(app).put('/users').expect(302, done);
+    });
+  });
+  describe('POST', function() {
+    it('/users/1 should return 302', function(done) {
       request(app).post('/users/1').expect(302, done);
     });
   });
-  describe('DELETE /users/:id', function() {
-    it('DELETE /users/2 should return 302', function(done) {
+  describe('DELETE', function() {
+    it('/users/2 should return 302', function(done) {
       request(app).del('/users/2').expect(302, done);
     });
   });
