@@ -54,12 +54,18 @@ describe('User API', function() {
   });
   describe('PUT', function() {
     it('/users should return 302', function(done) {
-      request(app).put('/users').expect(302, done);
+      request(app).put('/users').send({
+        name : 'name-put',
+        note : 'note-put'
+      }).expect(302, done);
     });
   });
   describe('POST', function() {
     it('/users/1 should return 302', function(done) {
-      request(app).post('/users/1').expect(302, done);
+      request(app).post('/users/1').send({
+        name : 'name-post',
+        note : 'note-post'
+      }).expect(302, done);
     });
   });
   describe('DELETE', function() {
