@@ -7,3 +7,10 @@ function destroy(that){
     };
     return false;
 }
+
+$(document).ready(function() {
+  $('.delete').click(function() {
+    destroy(this);
+    return false;
+  });
+});

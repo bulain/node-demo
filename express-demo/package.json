@@ -1,5 +1,5 @@
 {
-  "name": "application-name",
+  "name": "express-demo",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -8,13 +8,13 @@
   },
   "dependencies": {
     "express": "3.1.2",
-    "ejs": "*",
-    "mysql": "*",
+    "ejs": "0.8.3",
+    "mysql": "2.0.0-alpha8",
     "mongodb": "1.2.14",
-    "mocha": "*",
-    "async": "*",
-    "db-migrate": "*",
-    "mocha": "*",
-    "supertest": "0.6.0"
+    "mocha": "1.9.0",
+    "async": "0.2.8",
+    "db-migrate": "0.4.2",
+    "supertest": "0.6.0",
+    "ejs-locals": "1.0.2"
   }
 }

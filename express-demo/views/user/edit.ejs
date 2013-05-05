@@ -1,19 +1,21 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
+<% layout('../_layout') -%>
+
+<div class='container'>
+  <div class='row'>
     <h1><%= title %></h1>
-    <form action='/users/<%=user.id%>' method='post'>
+  </div>
+  <form action='/users/<%=user.id%>' method='post'>
+    <div class='row'>
       <div><label for='name'>Name</label></div>
       <div><input type='text' id='name' name='name' value='<%=user.name%>'/></div>
+    </div>
+    <div class='row'>
       <div><label for='note'>Note</label></div>
       <div><input type='text' id='note' name='note' value='<%=user.note%>'/></div>
-      <div>
-        <button type='submit'>Update</button>
-      </div>
-    </form>
-  </body>
-</html>
+    </div>
+    <div class='row'>
+      <a href='/users'>Back</a>
+      <button type='submit'>Update</button>
+    </div>
+  </form>
+</div>

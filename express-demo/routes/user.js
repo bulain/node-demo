@@ -10,6 +10,8 @@ exports.list = function(req, res){
 };
 exports.new = function(req, res){
   var user = new User();
+  user.name = '';
+  user.note = '';
   res.render('user/new', { title: 'New User', user: user });
 };
 exports.create = function(req, res){
