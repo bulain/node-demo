@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/bootstrap.min.css' />
+    <link rel='stylesheet' href='/stylesheets/bootstrap-responsive.min.css' />
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div class='container'>
+      <h1><%= title %></h1>
+      <div class='row'>
+        <div class='span12'><a href='/users/new'>Add User</a></div>
+      </div>
+      <div class='row'>
+        <div class='span1'>Id</div>
+        <div class='span3'>Name</div>
+        <div class='span6'>Note</div>
+        <div class='span2'>Action</div>
+      </div>
+      <% users.forEach(function(user) {%>
+      <div class='row'>
+        <div class='span1'><%=user.id%></div>
+        <div class='span3'><%=user.name%></div>
+        <div class='span6'><%=user.note%></div>
+        <div class='span2'><a href='/users/<%=user.id%>'>Edit</a>|<a href='/users/<%=user.id%>' class='delete'>Delete</a></div>
+      </div>
+      <%});%>
+    </div>
+  </body>
+  <script src='/javascripts/jquery.min.js'></script>
+  <script src='/javascripts/bootstrap.min.js'></script>
+  <script src='/javascripts/public.js'></script>
+  <script>
+    $(document).ready(function() {
+      $('.delete').click(function() {
+        destroy(this);
+        return false;
+      });
+    });
+  </script>
+</html>

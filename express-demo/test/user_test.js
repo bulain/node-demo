@@ -83,14 +83,25 @@ describe('user', function() {
       });
     });
   });
-  describe('#destory', function() {
+  describe('#delete', function() {
     it('should success when delete user', function(done) {
       var user = new User();
       user.id = 3;
-      user.destory(function(err, results) {
+      user.delete(function(err, results) {
         if (err)
           return done(err);
         assert.equal(1, results.affectedRows);
+        done();
+      });
+    });
+  });
+  describe('#list', function() {
+    it('should success when list user', function(done) {
+      var user = new User();
+      user.list(function(err, rows) {
+        if (err)
+          return done(err);
+        assert.equal(6, rows.length)
         done();
       });
     });

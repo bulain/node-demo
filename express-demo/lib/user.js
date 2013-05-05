@@ -42,12 +42,24 @@ User.prototype.get = function(callback) {
         });
   });
 }
-User.prototype.destory = function(callback) {
+User.prototype.delete = function(callback) {
   var user = {
     id : this.id
   };
   pool.getConnection(function(err, conn) {
     conn.query('delete from users where id=?', [user.id],
+        function(err, results) {
+          callback.apply(this, arguments);
+          conn.end();
+        });
+  });
+}
+User.prototype.list = function(callback) {
+  var user = {
+    name : this.name
+  };
+  pool.getConnection(function(err, conn) {
+    conn.query('select id, name, note from users',
         function(err, results) {
           callback.apply(this, arguments);
           conn.end();
