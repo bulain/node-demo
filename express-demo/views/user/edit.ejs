@@ -2,20 +2,20 @@
 
 <div class='container'>
   <div class='row'>
-    <h1><%= title %></h1>
+    <h1><%=t('common.title.edit')%><%=t('user.model')%></h1>
   </div>
   <form action='/users/<%=user.id%>' method='post'>
     <div class='row'>
-      <div><label for='name'>Name</label></div>
+      <div><label for='name'><%=t('user.name')%></label></div>
       <div><input type='text' id='name' name='name' value='<%=user.name%>'/></div>
     </div>
     <div class='row'>
-      <div><label for='note'>Note</label></div>
+      <div><label for='note'><%=t('user.note')%></label></div>
       <div><input type='text' id='note' name='note' value='<%=user.note%>'/></div>
     </div>
     <div class='row'>
-      <a href='/users'>Back</a>
-      <button type='submit'>Update</button>
+      <a href='/users'><%=t('common.action.back')%></a>
+      <button type='submit'><%=t('common.action.update')%></button>
     </div>
   </form>
 </div>

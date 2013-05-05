@@ -1,0 +1,24 @@
+{
+  "common":{
+    "title": {
+      "list": "列表",
+      "new": "新建",
+      "edit": "编辑"
+    },
+    "action": {
+      "action": "动作",
+      "new": "新建",
+      "edit": "编辑",
+      "create": "创建",
+      "update": "更新",
+      "delete": "删除",
+      "back": "返回"
+    }
+  },
+  "user": {
+    "model": "用户",
+    "id": "编号",
+    "name": "姓名",
+    "note": "备注"
+  }
+}

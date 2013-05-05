@@ -1,0 +1,24 @@
+{
+  "common":{
+    "title": {
+      "list": "List ",
+      "new": "New ",
+      "edit": "Edit "
+    },
+    "action": {
+      "action": "Action",
+      "new": "New",
+      "edit": "Edit",
+      "create": "Create",
+      "update": "Update",
+      "delete": "Delete",
+      "back": "Back"
+    }
+  },
+  "user": {
+    "model": "User ",
+    "id": "Id",
+    "name": "Name",
+    "note": "Note"
+  }
+}

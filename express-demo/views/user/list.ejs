@@ -1,22 +1,24 @@
 <% layout('../_layout') -%>
 
 <div class='container'>
-  <h1><%= title %></h1>
   <div class='row'>
-    <div class='span12'><a href='/users/new'>New User</a></div>
+    <h1><%=t('user.model')%><%=t('common.title.list')%></h1>
   </div>
   <div class='row'>
-    <div class='span1'>Id</div>
-    <div class='span3'>Name</div>
-    <div class='span6'>Note</div>
-    <div class='span2'>Action</div>
+    <div class='span12'><a href='/users/new'><%=t('common.title.new')%><%=t('user.model')%></a></div>
+  </div>
+  <div class='row'>
+    <div class='span1'><%=t('user.id')%></div>
+    <div class='span3'><%=t('user.name')%></div>
+    <div class='span6'><%=t('user.note')%></div>
+    <div class='span2'><%=t('common.action.action')%></div>
   </div>
   <% users.forEach(function(user) {%>
   <div class='row'>
     <div class='span1'><%=user.id%></div>
     <div class='span3'><%=user.name%></div>
     <div class='span6'><%=user.note%></div>
-    <div class='span2'><a href='/users/<%=user.id%>'>Edit</a>|<a href='/users/<%=user.id%>' class='delete'>Delete</a></div>
+    <div class='span2'><a href='/users/<%=user.id%>'><%=t('common.action.edit')%></a>|<a href='/users/<%=user.id%>' class='delete'><%=t('common.action.delete')%></a></div>
   </div>
   <%});%>
 </div>

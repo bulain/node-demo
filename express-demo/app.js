@@ -8,21 +8,25 @@ var express = require('express')
   , user = require('./routes/user')
   , http = require('http')
   , path = require('path')
-  , engine = require('ejs-locals');
+  , engine = require('ejs-locals')
+  , i18next = require('i18next');
+
+i18next.init();
 
 var app = express();
 
 // all environments
 app.set('port', process.env.PORT || 3000);
-app.engine('ejs', engine);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
+app.engine('ejs', engine);
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(express.cookieParser('secret'));
 app.use(express.session());
+app.use(i18next.handle);
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -30,6 +34,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
+
+i18next.registerAppHelper(app);
 
 app.get('/', routes.index);
 app.get('/users', user.list);
