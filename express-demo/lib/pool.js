@@ -4,7 +4,7 @@ var config = require('./config');
 module.exports = function(){
   config.load('./database.json');
   var current = config.getCurrent();
-  console.info("Using", current.env, "settings:", current.settings);
+  console.info("Using", current.env, "settings:\n", current.settings);
   
   return mysql.createPool({
     host     : current.settings.host,
