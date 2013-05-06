@@ -2,12 +2,16 @@ This is express demo project.
 
 ###node modules:
 
-* express
-* ejs
-* mysql
-* mongodb
-* mocha
 * async
+* db-migrate
+* ejs
+* ejs-locals
+* express
+* i18next
+* mocha
+* mongodb
+* mysql
+* supertest
 
 ###js framework
 
