@@ -4,18 +4,18 @@
   <div class='row'>
     <h1><%=t('common.title.new')%><%=t('user.model')%></h1>
   </div>
-  <form action='/user' method='post'>
+  <form action='/users' method='post'>
     <div class='row'>
       <div><label for='name'><%=t('user.name')%></label></div>
-      <div><input type='text' id='user.name' name='user[name]' value='<%=user.name%>'/></div>
+      <div><input type='text' id='name' name='name' value='<%=user.name%>'/></div>
     </div>
     <div class='row'>
       <div><label for='note'><%=t('user.note')%></label></div>
-      <div><input type='text' id='user.note' name='user[note]' value='<%=user.note%>'/></div>
+      <div><input type='text' id='note' name='note' value='<%=user.note%>'/></div>
     </div>
     <div class='row'>
       <input type='hidden' name='_method' value='PUT'/>
-      <a href='/user'><%=t('common.action.back')%></a>
+      <a href='/users'><%=t('common.action.back')%></a>
       <button type='submit'><%=t('common.action.create')%></button>
     </div>
   </form>

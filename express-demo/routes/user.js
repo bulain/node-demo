@@ -1,61 +1,52 @@
-var User = require('../lib/user');
+var userdao = require('../lib/user');
 var i18n = require("i18next");
 
 exports.list = function(req, res){
-  var user = new User();
-  user.list(function(err, rows) {
+  userdao.list(function(err, rows) {
     if (err)
       req.flash('error', err);
     res.render('user/list', { title: i18n.t('user.model'), users: rows });
   });
 };
 exports.new = function(req, res){
-  var user = new User();
-  user.name = '';
-  user.note = '';
+  var user = {name:'', note:''};
   res.render('user/new', { title: i18n.t('user.model'), user: user });
 };
 exports.create = function(req, res){
-  var user = new User();
-  user.name = req.body.name;
-  user.note = req.body.note;
-  user.create(function(err, results) {
+  var user = req.body.user || {};
+  userdao.create(user, function(err, results) {
     if (err){
       req.flash('error', err);
       res.render('user/new', { title: i18n.t('user.model'), user: user });
     }
-    res.redirect('/users'); 
+    res.redirect('/user'); 
   });
 };
 exports.edit = function(req, res){
-  var user = new User();
-  user.id = req.params.id;
-  user.get(function(err, rows) {
+  var id = req.params.id;
+  userdao.get(id, function(err, rows) {
     if (err)
       req.flash('error', err);
     res.render('user/edit', { title: i18n.t('user.model'), user: rows[0] });
   });
 };
 exports.update = function(req, res){
-  var user = new User();
+  var user = req.body.user || {};
   user.id = req.params.id;
-  user.name = req.body.name;
-  user.note = req.body.note;
-  user.update(function(err, results) {
+  userdao.update(user, function(err, results) {
     if (err){
       req.flash('error', err);
       res.render('user/edit', { title: i18n.t('user.model'), user: user });
     }
-    res.redirect('/users'); 
+    res.redirect('/user'); 
   });
 };
 exports.delete = function(req, res){
-  var user = new User();
-  user.id = req.params.id;
-  user.delete(function(err, results) {
+  var id = req.params.id;
+  userdao.delete(id, function(err, results) {
     if (err){
       req.flash('error', err);
     }
-    res.redirect('/users'); 
+    res.redirect('/user'); 
   });
 };

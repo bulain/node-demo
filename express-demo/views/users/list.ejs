@@ -5,7 +5,7 @@
     <h1><%=t('user.model')%><%=t('common.title.list')%></h1>
   </div>
   <div class='row'>
-    <div class='span12'><a href='/user/new'><%=t('common.title.new')%><%=t('user.model')%></a></div>
+    <div class='span12'><a href='/users/new'><%=t('common.title.new')%><%=t('user.model')%></a></div>
   </div>
   <div class='row'>
     <div class='span1'><%=t('user.id')%></div>
@@ -18,7 +18,7 @@
     <div class='span1'><%=user.id%></div>
     <div class='span3'><%=user.name%></div>
     <div class='span6'><%=user.note%></div>
-    <div class='span2'><a href='/user/<%=user.id%>'><%=t('common.action.edit')%></a>|<a href='/user/<%=user.id%>' class='delete'><%=t('common.action.delete')%></a></div>
+    <div class='span2'><a href='/users/<%=user.id%>'><%=t('common.action.edit')%></a>|<a href='/users/<%=user.id%>' class='delete'><%=t('common.action.delete')%></a></div>
   </div>
   <%});%>
 </div>

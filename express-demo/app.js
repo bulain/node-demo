@@ -5,6 +5,7 @@
 
 var express = require('express')
   , routes = require('./routes')
+  , users = require('./routes/users')
   , user = require('./routes/user')
   , http = require('http')
   , path = require('path')
@@ -38,12 +39,20 @@ if ('development' == app.get('env')) {
 i18next.registerAppHelper(app);
 
 app.get('/', routes.index);
-app.get('/users', user.list);
-app.get('/users/new', user.new);
-app.put('/users', user.create);
-app.get('/users/:id', user.edit);
-app.post('/users/:id', user.update);
-app.delete('/users/:id', user.delete);
+
+app.get('/users', users.list);
+app.get('/users/new', users.new);
+app.put('/users', users.create);
+app.get('/users/:id', users.edit);
+app.post('/users/:id', users.update);
+app.delete('/users/:id', users.delete);
+
+app.get('/user', user.list);
+app.get('/user/new', user.new);
+app.put('/user', user.create);
+app.get('/user/:id', user.edit);
+app.post('/user/:id', user.update);
+app.delete('/user/:id', user.delete);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

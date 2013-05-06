@@ -42,39 +42,35 @@ describe('User API', function() {
     });
   });
   describe('GET', function() {
-    it('/user should return 200', function(done) {
-      request(app).get('/user').expect(200, done);
+    it('/users should return 200', function(done) {
+      request(app).get('/users').expect(200, done);
     });
-    it('/user/new should return 200', function(done) {
-      request(app).get('/user/new').expect(200, done);
+    it('/users/new should return 200', function(done) {
+      request(app).get('/users/new').expect(200, done);
     });
-    it('/user/1 should return 200', function(done) {
-      request(app).get('/user/1').expect(200, done);
+    it('/users/1 should return 200', function(done) {
+      request(app).get('/users/1').expect(200, done);
     });
   });
   describe('PUT', function() {
-    it('/user should return 302', function(done) {
-      request(app).put('/user').send({
-        user : {
-          name : 'name-put',
-          note : 'note-put'
-        }
+    it('/users should return 302', function(done) {
+      request(app).put('/users').send({
+        name : 'name-put',
+        note : 'note-put'
       }).expect(302, done);
     });
   });
   describe('POST', function() {
-    it('/user/1 should return 302', function(done) {
-      request(app).post('/user/1').send({
-        user : {
-          name : 'name-post',
-          note : 'note-post'
-        }
+    it('/users/1 should return 302', function(done) {
+      request(app).post('/users/1').send({
+        name : 'name-post',
+        note : 'note-post'
       }).expect(302, done);
     });
   });
   describe('DELETE', function() {
-    it('/user/2 should return 302', function(done) {
-      request(app).del('/user/2').expect(302, done);
+    it('/users/2 should return 302', function(done) {
+      request(app).del('/users/2').expect(302, done);
     });
   });
 });

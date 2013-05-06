@@ -1,5 +1,5 @@
 var assert = require('assert');
-var userdao = require('../lib/user');
+var User = require('../lib/users');
 var pool = require('../lib/pool');
 
 describe('user', function() {
@@ -34,17 +34,19 @@ describe('user', function() {
     });
     users.forEach(function(user) {
       pool.getConnection(function(err, conn) {
-        conn.query('insert into users set ?', user, 
-            function(err, results) {
-              conn.end();
-            });
+        conn.query('insert into users (id, name, note) values(?, ?, ?)', [
+            user.id, user.name, user.note], function(err, results) {
+          conn.end();
+        });
       });
     });
   });
   describe('#create', function() {
     it('should success when insert user', function(done) {
-      var user = {name: 'name-test', note: 'note-test'};
-      userdao.create(user, function(err, results) {
+      var user = new User();
+      user.name = 'name-test';
+      user.note = 'note-test';
+      user.create(function(err, results) {
         if (err)
           return done(err);
         assert.equal(1, results.affectedRows);
@@ -54,8 +56,11 @@ describe('user', function() {
   });
   describe('#update', function() {
     it('should success when update user', function(done) {
-      var user = {id: 1, name: 'name-updated', note: 'note-updated'};
-      userdao.update(user, function(err, results) {
+      var user = new User();
+      user.id = 1;
+      user.name = 'name-updated';
+      user.note = 'note-updated';
+      user.update(function(err, results) {
         if (err)
           return done(err);
         assert.equal(1, results.affectedRows);
@@ -65,7 +70,9 @@ describe('user', function() {
   });
   describe('#get', function() {
     it('should success when get user', function(done) {
-      userdao.get(2, function(err, rows) {
+      var user = new User();
+      user.id = 2;
+      user.get(function(err, rows) {
         if (err)
           return done(err);
         assert.equal(1, rows.length);
@@ -78,7 +85,9 @@ describe('user', function() {
   });
   describe('#delete', function() {
     it('should success when delete user', function(done) {
-      userdao.delete(3, function(err, results) {
+      var user = new User();
+      user.id = 3;
+      user.delete(function(err, results) {
         if (err)
           return done(err);
         assert.equal(1, results.affectedRows);
@@ -88,7 +97,8 @@ describe('user', function() {
   });
   describe('#list', function() {
     it('should success when list user', function(done) {
-      userdao.list(function(err, rows) {
+      var user = new User();
+      user.list(function(err, rows) {
         if (err)
           return done(err);
         assert.equal(6, rows.length)
@@ -98,8 +108,9 @@ describe('user', function() {
   });
   describe('#find', function() {
     it('should success when query user', function(done) {
-      var user = {name:'name'};
-      userdao.find(user, function(err, rows) {
+      var user = new User();
+      user.name = 'name';
+      user.find(function(err, rows) {
         if (err)
           return done(err);
         assert.equal(3, rows.length)
