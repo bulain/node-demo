@@ -4,7 +4,7 @@
         jquery: "jquery.min",
         bootstrap: "bootstrap.min"
     },
-    excludeShallow: ['jquery', 'bootstrap'],
+    excludeShallow: [],
     name: "main",
-    out: "public/javascripts/all.js"
+    out: "public/javascripts/built.js"
 })

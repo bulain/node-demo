@@ -1,3 +1,4 @@
 .project
 node_modules/
-all.js
+built.js
+built.css
