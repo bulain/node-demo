@@ -11,11 +11,13 @@ This is express demo project.
 * mocha
 * mongodb
 * mysql
+* requirejs
 * supertest
 
 ###js framework
 
 * jquery
+* requirejs
 
 ###css framework
 

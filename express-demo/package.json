@@ -16,6 +16,7 @@
     "db-migrate": "0.4.2",
     "supertest": "0.6.0",
     "ejs-locals": "1.0.2",
-    "i18next": "1.6.7"
+    "i18next": "1.6.7",
+    "requirejs": "2.1.5"
   }
 }
