@@ -5,7 +5,18 @@
     <link rel='stylesheet' href='/stylesheets/main.css' />
   </head>
   <body>
-    <%- body -%>
+    <div class='container'>
+      <% if (flash.inf) { %>
+        <div class="alert alert-success"><%= flash.inf %></div>
+      <% } %>
+      <% if (flash.err || flash.valerr) { %>
+        <div class="alert alert-error">
+        <%if(flash.err){%><%= flash.err %><%}%>
+        <%if(flash.valerr){for(var index in flash.valerr){%><%=t(flash.valerr[index][0].param) +': '+ flash.valerr[index][0].msg%><%}}%>
+        </div>
+      <% } %>
+      <%- body -%>
+    </div>
   </body>
   <script data-main="/javascripts/main.js" src="/javascripts/require.min.js"></script>
 </html>

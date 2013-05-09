@@ -4,12 +4,14 @@
  */
 
 var express = require('express')
+  , expressValidator = require('express-validator')
   , routes = require('./routes')
   , users = require('./routes/users')
   , user = require('./routes/user')
   , http = require('http')
   , path = require('path')
   , engine = require('ejs-locals')
+  , flash = require('connect-flash')
   , i18next = require('i18next');
 
 i18next.init();
@@ -27,6 +29,8 @@ app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(express.cookieParser('secret'));
 app.use(express.session());
+app.use(flash());
+app.use(expressValidator);
 app.use(i18next.handle);
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));

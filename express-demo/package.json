@@ -17,6 +17,8 @@
     "supertest": "0.6.0",
     "ejs-locals": "1.0.2",
     "i18next": "1.6.7",
-    "requirejs": "2.1.5"
+    "requirejs": "2.1.5",
+    "express-validator": "0.3.2",
+    "connect-flash": "0.1.0"
   }
 }

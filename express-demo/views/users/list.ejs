@@ -1,6 +1,5 @@
 <% layout('../_layout') -%>
 
-<div class='container'>
   <div class='row'>
     <h1><%=t('user.model')%><%=t('common.title.list')%></h1>
   </div>
@@ -21,4 +20,3 @@
     <div class='span2'><a href='/users/<%=user.id%>'><%=t('common.action.edit')%></a>|<a href='/users/<%=user.id%>' class='delete'><%=t('common.action.delete')%></a></div>
   </div>
   <%});%>
-</div>

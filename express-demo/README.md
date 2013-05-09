@@ -3,10 +3,12 @@ This is express demo project.
 ###node modules:
 
 * async
+* connect-flash
 * db-migrate
 * ejs
 * ejs-locals
 * express
+* express-validator
 * i18next
 * mocha
 * mongodb
