@@ -1,11 +1,12 @@
 var client = require('../lib/client');
 var assert = require('assert');
 var should = require('should');
+var async = require('async');
 
 describe('client', function() {
   var prefix = 'http://localhost/jenkins/job';
   var project = 'activiti5-demo';
-  
+
   describe('#getJson', function() {
     it('should return SUCCESS when lastSuccessfulBuild', function(done) {
       client.getJson({
@@ -115,7 +116,7 @@ describe('client', function() {
         done();
       });
     });
-    it('should return 1 array when 93', function(done) {
+    it('should return empty array when 93', function(done) {
       client.getFailedJson({
         prefix : prefix,
         project : project,
@@ -125,8 +126,57 @@ describe('client', function() {
           return done(err);
         }
 
+        jsons.should.be.empty;
+
+        done();
+      });
+    });
+  });
+  describe('#getThroughJson', function() {
+    it('should return 3 array when 97', function(done) {
+      client.getThroughJson({
+        prefix : prefix,
+        project : project,
+        build : '97'
+      }, function(err, jsons) {
+        if (err) {
+          return done(err);
+        }
+
         jsons.should.not.be.empty;
-        jsons.should.have.lengthOf(1);
+        jsons.should.have.lengthOf(3);
+
+        done();
+      });
+    });
+    it('should return 5 array when 89', function(done) {
+      client.getThroughJson({
+        prefix : prefix,
+        project : project,
+        build : '89'
+      }, function(err, jsons) {
+        if (err) {
+          return done(err);
+        }
+
+        jsons.should.not.be.empty;
+        jsons.should.have.lengthOf(5);
+
+        done();
+      });
+    });
+    it('should return 11 array when 94', function(done) {
+      client.getThroughJson({
+        prefix : prefix,
+        project : project,
+        build : '94'
+      }, function(err, jsons) {
+        if (err) {
+          return done(err);
+        }
+
+        jsons.should.not.be.empty;
+        jsons.should.have.lengthOf(11);
 
         done();
       });

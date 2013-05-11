@@ -4,15 +4,16 @@ var util = require('../lib/util');
 
 var getJson = function(option, callback) {
   option = option || {};
-  var utl = option.prefix + '/' + option.project + '/' + option.build
+  var url = option.prefix + '/' + option.project + '/' + option.build
       + '/api/json';
-  http.get(utl, function(res) {
+  http.get(url, function(res) {
     var body = '';
     res.on('data', function(chunk) {
       body += chunk;
     });
     res.on('end', function() {
       var jres = JSON.parse(body)
+      jres.project = option.project;
       callback(null, jres);
     });
   }).on('error', function(e) {
@@ -44,7 +45,6 @@ var getTreeJson = function(option, callback) {
 var getFailedJson = function(option, callback) {
   var opt = option;
   var jsons = [];
-  var result = null;
   var index = -1;
   async.doWhilst(function(cb) {
     getJson(opt, function(err, json) {
@@ -54,18 +54,56 @@ var getFailedJson = function(option, callback) {
       }
 
       index++;
-      opt.build = opt.build - 1;
-      result = json.result;
-      if ((index <= 0)
+      var result = json.result;
+      if ((index <= 0 && result == 'SUCCESS')
           || (index > 0 && result != 'SUCCESS')) {
         jsons.push(json);
+        opt.build = opt.build - 1;
+      } else {
+        opt = null;
       }
 
       cb();
     });
   }, function() {
-    return (index <= 0 && result == 'SUCCESS')
-        || (index > 0 && result != 'SUCCESS');
+    return opt;
+  }, function() {
+    callback(null, jsons);
+  });
+};
+
+var getThroughJson = function(option, callback) {
+  var opt = option;
+  var jsons = [];
+  var temp = [];
+  var index = -1;
+  async.doWhilst(function(cb) {
+    getJson(opt, function(err, json) {
+      if (err) {
+        callback(err);
+        return;
+      }
+
+      index++;
+      var result = json.result;
+      if ((index <= 0 && result == 'SUCCESS')
+          || (index > 0 && result != 'SUCCESS')) {
+        jsons.push(json);
+        temp.push(json);
+        opt.build = opt.build - 1;
+      } else {
+        opt = null;
+        while (temp.length && opt == null) {
+          index = -1;
+          json = temp.shift();
+          opt = util.getOption(option, util.getParent(json));
+        }
+      }
+
+      cb();
+    });
+  }, function() {
+    return opt;
   }, function() {
     callback(null, jsons);
   });
@@ -74,3 +112,4 @@ var getFailedJson = function(option, callback) {
 exports.getJson = getJson;
 exports.getTreeJson = getTreeJson;
 exports.getFailedJson = getFailedJson;
+exports.getThroughJson = getThroughJson;
