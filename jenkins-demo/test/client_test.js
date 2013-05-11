@@ -1,5 +1,4 @@
 var client = require('../lib/client');
-var assert = require('assert');
 var should = require('should');
 var async = require('async');
 
