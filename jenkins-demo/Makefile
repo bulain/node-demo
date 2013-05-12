@@ -1,4 +1,4 @@
-REPORTER = dot
+REPORTER = spec
 
 test:
 	./node_modules/mocha/bin/mocha \

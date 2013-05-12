@@ -6,7 +6,7 @@ describe('file', function() {
   var project = 'activiti5-demo';
 
   describe('#writeLog', function() {
-    it('should write log into file', function(done) {
+    it('should write change set into file', function(done) {
       file.writeLog({
         prefix : prefix,
         project : project,

@@ -3,9 +3,9 @@ var should = require('should');
 var json = require('../test/api.json');
 
 describe('util', function() {
-  describe('#getParent', function() {
-    it('should return cause ', function() {
-      var parent = util.getParent(json);
+  describe('#getUpstream', function() {
+    it('should return upstream info from json', function() {
+      var parent = util.getUpstream(json);
       parent.should.include({
         upstreamBuild : 51,
         upstreamProject : "common",
@@ -13,7 +13,7 @@ describe('util', function() {
     });
   });
   describe('#getOption', function() {
-    it('should return option ', function() {
+    it('should return option when given option', function() {
       var option = {
         prefix : 'prefix',
         project : 'project',
@@ -31,7 +31,7 @@ describe('util', function() {
         build : '1'
       });
     });
-    it('should return empty ', function() {
+    it('should return null when given null', function() {
       var option = {
         prefix : 'prefix',
         project : 'project',

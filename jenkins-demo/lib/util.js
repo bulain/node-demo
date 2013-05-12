@@ -1,4 +1,4 @@
-var getParent = function(json) {
+var getUpstream = function(json) {
   var causes = [];
   for ( var i in json.actions) {
     var action = json.actions[i];
@@ -25,5 +25,5 @@ var getOption = function(option, cause) {
   } : null;
 };
 
-exports.getParent = getParent;
+exports.getUpstream = getUpstream;
 exports.getOption = getOption;

@@ -33,7 +33,7 @@ var getTreeJson = function(option, callback) {
         return;
       }
       jsons.push(json);
-      var parent = util.getParent(json);
+      var parent = util.getUpstream(json);
       opt = util.getOption(opt, parent);
       cb();
     });
@@ -96,7 +96,7 @@ var getThroughJson = function(option, callback) {
         while (temp.length && opt == null) {
           index = -1;
           json = temp.shift();
-          opt = util.getOption(option, util.getParent(json));
+          opt = util.getOption(option, util.getUpstream(json));
         }
       }
 
