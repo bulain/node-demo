@@ -1,7 +1,7 @@
-REPORTER = spec
+REPORTER = tap
 
 test:
-	./node_modules/mocha/bin/mocha \
+	./node_modules/.bin/mocha \
 	--reporter $(REPORTER)
 
  .PHONY: test
