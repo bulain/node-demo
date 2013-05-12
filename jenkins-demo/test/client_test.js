@@ -1,6 +1,5 @@
 var client = require('../lib/client');
 var should = require('should');
-var async = require('async');
 
 describe('client', function() {
   var prefix = 'http://localhost/jenkins/job';
@@ -83,6 +82,21 @@ describe('client', function() {
     });
   });
   describe('#getFailedJson', function() {
+    it('should return 2 array when lastSuccessfulBuild', function(done) {
+      client.getFailedJson({
+        prefix : prefix,
+        project : project,
+        build : 'lastSuccessfulBuild'
+      }, function(err, jsons) {
+        if (err) {
+          return done(err);
+        }
+
+        jsons.should.not.be.empty;
+
+        done();
+      });
+    });
     it('should return 1 array when 97', function(done) {
       client.getFailedJson({
         prefix : prefix,
@@ -132,6 +146,21 @@ describe('client', function() {
     });
   });
   describe('#getThroughJson', function() {
+    it('should return 2 array when lastSuccessfulBuild', function(done) {
+      client.getThroughJson({
+        prefix : prefix,
+        project : project,
+        build : 'lastSuccessfulBuild'
+      }, function(err, jsons) {
+        if (err) {
+          return done(err);
+        }
+
+        jsons.should.not.be.empty;
+
+        done();
+      });
+    });
     it('should return 3 array when 97', function(done) {
       client.getThroughJson({
         prefix : prefix,

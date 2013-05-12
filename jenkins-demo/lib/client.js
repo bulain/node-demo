@@ -58,7 +58,7 @@ var getFailedJson = function(option, callback) {
       if ((index <= 0 && result == 'SUCCESS')
           || (index > 0 && result != 'SUCCESS')) {
         jsons.push(json);
-        opt.build = opt.build - 1;
+        opt.build = json.number - 1;
       } else {
         opt = null;
       }
@@ -90,7 +90,7 @@ var getThroughJson = function(option, callback) {
           || (index > 0 && result != 'SUCCESS')) {
         jsons.push(json);
         temp.push(json);
-        opt.build = opt.build - 1;
+        opt.build = json.number - 1;
       } else {
         opt = null;
         while (temp.length && opt == null) {
