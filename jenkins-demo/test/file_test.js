@@ -10,7 +10,7 @@ describe('file', function() {
       file.writeLog({
         prefix : prefix,
         project : project,
-        build : '94',
+        build : 'lastSuccessfulBuild',
         file : '2.log'
       }, function(err) {
         if (err) {
