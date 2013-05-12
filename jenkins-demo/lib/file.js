@@ -20,9 +20,8 @@ var writeLog = function(option, callback) {
         }
       }
       stream.end();
+      callback();
     });
-
-    callback();
   });
 };
 
