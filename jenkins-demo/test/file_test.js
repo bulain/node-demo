@@ -4,6 +4,7 @@ var should = require('should');
 describe('file', function() {
   var prefix = 'http://localhost/jenkins/job';
   var project = 'activiti5-demo';
+  var number = process.env.BUILD_NUMBER || '0';
 
   describe('#writeLog', function() {
     it('should write change set into file', function(done) {
@@ -11,7 +12,7 @@ describe('file', function() {
         prefix : prefix,
         project : project,
         build : 'lastSuccessfulBuild',
-        file : '2.log'
+        file : number + '.log'
       }, function(err) {
         if (err) {
           done(err);
