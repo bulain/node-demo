@@ -14,6 +14,9 @@ var express = require('express')
   , flash = require('connect-flash')
   , i18next = require('i18next');
 
+var log4js = require('log4js');
+log4js.configure('log4js.json', {});
+
 i18next.init();
 
 var app = express();
@@ -58,8 +61,24 @@ app.get('/user/:id', user.edit);
 app.post('/user/:id', user.update);
 app.delete('/user/:id', user.delete);
 
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
-});
+// cluster
+var cluster = require('cluster');
+var numCPUs = require('os').cpus().length;
+
+if (cluster.isMaster) {
+  console.info('Master process ' + process.pid + ' start');
+  
+  for (var i = 0; i < numCPUs; i++) {
+    cluster.fork();
+  }
+
+  cluster.on('exit', function(worker, code, signal) {
+    console.info('worker ' + worker.process.pid + ' died');
+  });
+} else {
+  http.createServer(app).listen(app.get('port'), function(){
+    console.info('Worker process ' + process.pid + ' listening on port ' + app.get('port'));
+  });
+}
 
 module.exports = app;
