@@ -82,7 +82,7 @@ describe('client', function() {
     });
   });
   describe('#getFailedJson', function() {
-    it('should return 2 array when lastSuccessfulBuild', function(done) {
+    it('should return not empty array when lastSuccessfulBuild', function(done) {
       client.getFailedJson({
         prefix : prefix,
         project : project,
@@ -146,7 +146,7 @@ describe('client', function() {
     });
   });
   describe('#getThroughJson', function() {
-    it('should return 2 array when lastSuccessfulBuild', function(done) {
+    it('should return not empty array when lastSuccessfulBuild', function(done) {
       client.getThroughJson({
         prefix : prefix,
         project : project,

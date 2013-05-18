@@ -12,9 +12,14 @@ var getJson = function(option, callback) {
       body += chunk;
     });
     res.on('end', function() {
-      var jres = JSON.parse(body)
-      jres.project = option.project;
-      callback(null, jres);
+      try {
+        var jres = JSON.parse(body);
+        jres.project = option.project;
+        callback(null, jres);
+      } catch (e) {
+        console.log('Error URL: ' + url);
+        callback(null, null);
+      }
     });
   }).on('error', function(e) {
     callback(e);
@@ -32,9 +37,13 @@ var getTreeJson = function(option, callback) {
         callback(err);
         return;
       }
-      jsons.push(json);
-      var parent = util.getUpstream(json);
-      opt = util.getOption(opt, parent);
+      if (json) {
+        jsons.push(json);
+        var parent = util.getUpstream(json);
+        opt = util.getOption(opt, parent);
+      } else {
+        opt = null;
+      }
       cb();
     });
   }, function() {
@@ -47,24 +56,25 @@ var getFailedJson = function(option, callback) {
   var jsons = [];
   var index = -1;
   async.doWhilst(function(cb) {
-    getJson(opt, function(err, json) {
-      if (err) {
-        callback(err);
-        return;
-      }
+    getJson(
+        opt,
+        function(err, json) {
+          if (err) {
+            callback(err);
+            return;
+          }
 
-      index++;
-      var result = json.result;
-      if ((index <= 0 && result == 'SUCCESS')
-          || (index > 0 && result != 'SUCCESS')) {
-        jsons.push(json);
-        opt.build = json.number - 1;
-      } else {
-        opt = null;
-      }
+          index++;
+          if (json && ((index <= 0 && json.result == 'SUCCESS') 
+              || (index > 0 && json.result != 'SUCCESS'))) {
+            jsons.push(json);
+            opt.build = json.number - 1;
+          } else {
+            opt = null;
+          }
 
-      cb();
-    });
+          cb();
+        });
   }, function() {
     return opt;
   }, function() {
@@ -85,9 +95,8 @@ var getThroughJson = function(option, callback) {
       }
 
       index++;
-      var result = json.result;
-      if ((index <= 0 && result == 'SUCCESS')
-          || (index > 0 && result != 'SUCCESS')) {
+      if (json && ((index <= 0 && json.result == 'SUCCESS')
+          || (index > 0 && json.result != 'SUCCESS'))) {
         jsons.push(json);
         temp.push(json);
         opt.build = json.number - 1;
