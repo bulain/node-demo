@@ -14,8 +14,8 @@ var express = require('express')
   , flash = require('connect-flash')
   , i18next = require('i18next');
 
-var log4js = require('log4js');
-log4js.configure('log4js.json', {});
+//var log4js = require('log4js');
+//log4js.configure('log4js.json', {});
 
 i18next.init();
 
