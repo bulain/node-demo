@@ -4,8 +4,7 @@ var util = require('../lib/util');
 
 var getJson = function(option, callback) {
   option = option || {};
-  var url = option.prefix + '/' + option.project + '/' + option.build
-      + '/api/json';
+  var url = option.prefix + '/' + option.project + '/' + option.build + '/api/json';
   http.get(url, function(res) {
     var body = '';
     res.on('data', function(chunk) {
@@ -65,8 +64,8 @@ var getFailedJson = function(option, callback) {
           }
 
           index++;
-          if (json && ((index <= 0 && json.result == 'SUCCESS') 
-              || (index > 0 && json.result != 'SUCCESS'))) {
+          if (json && ((index <= 0 && json.result == 'SUCCESS') || 
+              (index > 0 && json.result != 'SUCCESS'))) {
             jsons.push(json);
             opt.build = json.number - 1;
           } else {
@@ -95,8 +94,8 @@ var getThroughJson = function(option, callback) {
       }
 
       index++;
-      if (json && ((index <= 0 && json.result == 'SUCCESS')
-          || (index > 0 && json.result != 'SUCCESS'))) {
+      if (json && ((index <= 0 && json.result == 'SUCCESS') || 
+          (index > 0 && json.result != 'SUCCESS'))) {
         jsons.push(json);
         temp.push(json);
         opt.build = json.number - 1;
