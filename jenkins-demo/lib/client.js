@@ -28,6 +28,7 @@ var getJson = function(option, callback) {
 var getTreeJson = function(option, callback) {
   var opt = option;
   var jsons = [];
+  var upstreams = [];
   async.whilst(function() {
     return opt;
   }, function(cb) {
@@ -38,80 +39,19 @@ var getTreeJson = function(option, callback) {
       }
       if (json) {
         jsons.push(json);
-        var parent = util.getUpstream(json);
-        opt = util.getOption(opt, parent);
-      } else {
+        var ups = util.getUpstreams(json);
+        upstreams = upstreams.concat(ups);
+      } 
+      
+      if(upstreams.length){
+        var next = upstreams.shift();
+        opt = util.getOption(opt, next);
+      }else{
         opt = null;
       }
+      
       cb();
     });
-  }, function() {
-    callback(null, jsons);
-  });
-};
-
-var getFailedJson = function(option, callback) {
-  var opt = option;
-  var jsons = [];
-  var index = -1;
-  async.doWhilst(function(cb) {
-    getJson(
-        opt,
-        function(err, json) {
-          if (err) {
-            callback(err);
-            return;
-          }
-
-          index++;
-          if (json && ((index <= 0 && json.result == 'SUCCESS') || 
-              (index > 0 && json.result != 'SUCCESS'))) {
-            jsons.push(json);
-            opt.build = json.number - 1;
-          } else {
-            opt = null;
-          }
-
-          cb();
-        });
-  }, function() {
-    return opt;
-  }, function() {
-    callback(null, jsons);
-  });
-};
-
-var getThroughJson = function(option, callback) {
-  var opt = option;
-  var jsons = [];
-  var temp = [];
-  var index = -1;
-  async.doWhilst(function(cb) {
-    getJson(opt, function(err, json) {
-      if (err) {
-        callback(err);
-        return;
-      }
-
-      index++;
-      if (json && ((index <= 0 && json.result == 'SUCCESS') || 
-          (index > 0 && json.result != 'SUCCESS'))) {
-        jsons.push(json);
-        temp.push(json);
-        opt.build = json.number - 1;
-      } else {
-        opt = null;
-        while (temp.length && opt == null) {
-          index = -1;
-          json = temp.shift();
-          opt = util.getOption(option, util.getUpstream(json));
-        }
-      }
-
-      cb();
-    });
-  }, function() {
-    return opt;
   }, function() {
     callback(null, jsons);
   });
@@ -119,5 +59,3 @@ var getThroughJson = function(option, callback) {
 
 exports.getJson = getJson;
 exports.getTreeJson = getTreeJson;
-exports.getFailedJson = getFailedJson;
-exports.getThroughJson = getThroughJson;

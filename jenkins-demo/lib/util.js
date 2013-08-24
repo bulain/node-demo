@@ -1,21 +1,16 @@
-var getUpstream = function(json) {
-  var causes = [];
-  for ( var i in json.actions) {
-    var action = json.actions[i];
+var getUpstreams = function(json) {
+  
+  var causes = json.actions.filter(function(action){
+    return action.hasOwnProperty('causes');
+  }).map(function(action){
+    return action.causes.filter(function(cause){
+      return cause.hasOwnProperty('upstreamProject');
+    });
+  }).reduce(function(curr, prev){
+    return curr.concat(prev);
+  }, []);
 
-    if (!action.hasOwnProperty('causes')) {
-      break;
-    }
-
-    for ( var j in action.causes) {
-      var cause = action.causes[j];
-      if (cause.hasOwnProperty('upstreamProject')) {
-        causes.push(cause);
-      }
-    }
-  }
-
-  return causes.length ? causes[0] : null;
+  return causes;
 };
 var getOption = function(option, cause) {
   return cause ? {
@@ -25,5 +20,5 @@ var getOption = function(option, cause) {
   } : null;
 };
 
-exports.getUpstream = getUpstream;
+exports.getUpstreams = getUpstreams;
 exports.getOption = getOption;

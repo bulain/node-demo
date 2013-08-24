@@ -2,7 +2,7 @@ var client = require('../lib/client');
 var fs = require('fs');
 
 var writeLog = function(option, callback) {
-  client.getThroughJson(option, function(err, jsons) {
+  client.getTreeJson(option, function(err, jsons) {
     if (err) {
       return callback(err);
     }

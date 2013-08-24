@@ -3,10 +3,11 @@ var should = require('should');
 var json = require('../test/api.json');
 
 describe('util', function() {
-  describe('#getUpstream', function() {
+  describe('#getUpstreams', function() {
     it('should return upstream info from json', function() {
-      var parent = util.getUpstream(json);
-      parent.should.include({
+      var upstreams = util.getUpstreams(json);
+      upstreams.should.length(1);
+      upstreams[0].should.include({
         upstreamBuild : 51,
         upstreamProject : "common",
       });
