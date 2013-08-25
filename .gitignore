@@ -1,5 +1,6 @@
 .project
 node_modules/
+target/
 built.js
 built.css
 *.log

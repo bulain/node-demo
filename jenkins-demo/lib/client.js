@@ -3,6 +3,11 @@ var async = require('async');
 var util = require('../lib/util');
 
 /**
+ * The module client.
+ * @module client
+ */
+
+/**
  * Process the content of json content.
  * @callback jsonCallback
  * @param {Object} err The err object. 
@@ -17,7 +22,7 @@ var util = require('../lib/util');
  * @param {String} option.build The build number.
  * @param {jsonCallback} callback The callback of process json.
  */
-var getJson = function(option, callback) {
+exports.getJson = function(option, callback) {
   option = option || {};
   var url = option.prefix + '/' + option.project + '/' + option.build + '/api/json';
   http.get(url, function(res) {
@@ -48,14 +53,14 @@ var getJson = function(option, callback) {
  * @param {String} option.build The build number.
  * @param {jsonCallback} callback The callback of process json.
  */
-var getTreeJson = function(option, callback) {
+exports.getTreeJson = function(option, callback) {
   var opt = option;
   var jsons = [];
   var upstreams = [];
   async.whilst(function() {
     return opt;
   }, function(cb) {
-    getJson(opt, function(err, json) {
+    exports.getJson(opt, function(err, json) {
       if (err) {
         callback(err);
         return;
@@ -79,6 +84,3 @@ var getTreeJson = function(option, callback) {
     callback(null, jsons);
   });
 };
-
-exports.getJson = getJson;
-exports.getTreeJson = getTreeJson;

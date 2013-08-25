@@ -2,6 +2,11 @@ var client = require('../lib/client');
 var fs = require('fs');
 
 /**
+ * The module file.
+ * @module file
+ */
+
+/**
  * Process the result when write to file.
  * @callback fileCallback
  * @param {Object} err The err object. 
@@ -16,7 +21,7 @@ var fs = require('fs');
  * @param {String} option.file The log file.
  * @param {fileCallback} callback The callback of write to file.
  */
-var writeLog = function(option, callback) {
+exports.writeLog = function(option, callback) {
   client.getTreeJson(option, function(err, jsons) {
     if (err) {
       return callback(err);
@@ -41,7 +46,3 @@ var writeLog = function(option, callback) {
 
   });
 };
-
-
-
-exports.writeLog = writeLog;
