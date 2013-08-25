@@ -8,19 +8,24 @@ var util = require('../lib/util');
  */
 
 /**
+ * The client option object.
+ * @typedef {Object} ClientOption 
+ * @property {String} prefix The prefix string.
+ * @property {String} project The project name.
+ * @property {String} build The build number.
+ */
+
+/**
  * Process the content of json content.
- * @callback jsonCallback
+ * @callback JsonCallback
  * @param {Object} err The err object. 
  * @param {Object} json The json content.
  */
 
 /**
  * Get json from given option.
- * @param {Object} option The option object.
- * @param {String} option.prefix The prefix string.
- * @param {String} option.project The project name.
- * @param {String} option.build The build number.
- * @param {jsonCallback} callback The callback of process json.
+ * @param {ClientOption} option The option object.
+ * @param {JsonCallback} callback The callback of process json.
  */
 exports.getJson = function(option, callback) {
   option = option || {};
@@ -47,11 +52,8 @@ exports.getJson = function(option, callback) {
 
 /**
  * The tree json from given option.
- * @param {Object} option The option object.
- * @param {String} option.prefix The prefix string.
- * @param {String} option.project The project name.
- * @param {String} option.build The build number.
- * @param {jsonCallback} callback The callback of process json.
+ * @param {ClientOption} option The option object.
+ * @param {JsonCallback} callback The callback of process json.
  */
 exports.getTreeJson = function(option, callback) {
   var opt = option;

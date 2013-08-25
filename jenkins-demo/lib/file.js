@@ -7,19 +7,24 @@ var fs = require('fs');
  */
 
 /**
+ * The file option object.
+ * @typedef {Object} FileOption 
+ * @property {String} prefix The prefix string.
+ * @property {String} project The project name.
+ * @property {String} build The build number.
+ * @property {String} file The log file.
+ */
+
+/**
  * Process the result when write to file.
- * @callback fileCallback
+ * @callback FileCallback
  * @param {Object} err The err object. 
  */
 
 /**
  * Write log into file.
- * @param {Oject}
- * @param {String} option.prefix The prefix string.
- * @param {String} option.project The project name.
- * @param {String} option.build The build number.
- * @param {String} option.file The log file.
- * @param {fileCallback} callback The callback of write to file.
+ * @param {FileOption} option The option object.
+ * @param {FileCallback} callback The callback of write to file.
  */
 exports.writeLog = function(option, callback) {
   client.getTreeJson(option, function(err, jsons) {
