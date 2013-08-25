@@ -2,6 +2,21 @@ var http = require('http');
 var async = require('async');
 var util = require('../lib/util');
 
+/**
+ * Process the content of json content.
+ * @callback jsonCallback
+ * @param {Object} err The err object. 
+ * @param {Object} json The json content.
+ */
+
+/**
+ * Get json from given option.
+ * @param {Object} option The option object.
+ * @param {String} option.prefix The prefix string.
+ * @param {String} option.project The project name.
+ * @param {String} option.build The build number.
+ * @param {jsonCallback} callback The callback of process json.
+ */
 var getJson = function(option, callback) {
   option = option || {};
   var url = option.prefix + '/' + option.project + '/' + option.build + '/api/json';
@@ -25,6 +40,14 @@ var getJson = function(option, callback) {
   }).end();
 };
 
+/**
+ * The tree json from given option.
+ * @param {Object} option The option object.
+ * @param {String} option.prefix The prefix string.
+ * @param {String} option.project The project name.
+ * @param {String} option.build The build number.
+ * @param {jsonCallback} callback The callback of process json.
+ */
 var getTreeJson = function(option, callback) {
   var opt = option;
   var jsons = [];
