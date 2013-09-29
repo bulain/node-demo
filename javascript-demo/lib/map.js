@@ -20,19 +20,11 @@ Map.prototype.processQueue = function() {
 
   if (processing.length) {
     this.processed = false;
-    var count = processing.length;
-    var next = function(){
+    asyncEach(processing, function(item, cb) {
+      item.cmd(cb);
+    }, function(err) {
       that.processed = true;
       that.processQueue();
-    };
-    var iterator = function(){
-      count--;
-      if(count <= 0){
-        next();
-      }
-    };
-    processing.forEach(function(item){
-      item.cmd(iterator);
     });
 // async.each(processing, function(item, cb) {
 // item.cmd(cb);
@@ -97,6 +89,24 @@ function syncCmd(name, callback) {
   setTimeout(function() {
     console.log('syncCmd-' + name);
     callback(null);
+  });
+}
+
+function asyncEach(arr, iterator, callback){
+  callback = callback || function(){};
+  
+  if(!arr.length){
+    return callback();
+  }
+  
+  var completed = 0;
+  arr.forEach(function(item){
+    iterator(item, function(){
+      completed ++ ;
+      if(completed >= arr.length){
+        callback();
+      }
+    });
   });
 }
 
