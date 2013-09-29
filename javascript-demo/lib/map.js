@@ -27,7 +27,7 @@ Map.prototype.processQueue = function() {
     };
     var iterator = function(){
       count--;
-      if(count === 0){
+      if(count <== 0){
         next();
       }
     };
