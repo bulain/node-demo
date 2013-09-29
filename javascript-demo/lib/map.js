@@ -20,12 +20,22 @@ Map.prototype.processQueue = function() {
   var that = this;
   if (processing.length) {
     this.processed = false;
-    async.each(processing, function(item, cb) {
-      item.cmd(cb);
-    }, function(err) {
-      that.processed = true;
-      that.processQueue();
+    var count = processing.length();
+    processing.forEach(function(item){
+      item.cmd(function(){
+        count--;
+      });
+      if(count === 0){
+        that.processed = true;
+        that.processQueue();
+      }
     });
+// async.each(processing, function(item, cb) {
+// item.cmd(cb);
+// }, function(err) {
+// that.processed = true;
+// that.processQueue();
+// });
   } else if (!this.queue.length) {
     while (this.fns.length) {
       var fn = this.fns.shift();
