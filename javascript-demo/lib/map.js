@@ -1,5 +1,3 @@
-var async = require('async');
-
 var Map = function() {
   this.queue = [];
   this.fns = [];
@@ -26,12 +24,6 @@ Map.prototype.processQueue = function() {
       that.processed = true;
       that.processQueue();
     });
-// async.each(processing, function(item, cb) {
-// item.cmd(cb);
-// }, function(err) {
-// that.processed = true;
-// that.processQueue();
-// });
   } else if (!this.queue.length) {
     while (this.fns.length) {
       var fn = this.fns.shift();
