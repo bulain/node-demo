@@ -17,18 +17,22 @@ Map.prototype.processQueue = function() {
     processing.push(this.queue.shift());
   }
 
-  var that = this;
   if (processing.length) {
+    var that = this;
     this.processed = false;
-    var count = processing.length();
-    processing.forEach(function(item){
-      item.cmd(function(){
-        count--;
-      });
+    var count = processing.length;
+    var next = function(){
+      that.processed = true;
+      that.processQueue();
+    };
+    var iterator = function(){
+      count--;
       if(count === 0){
-        that.processed = true;
-        that.processQueue();
+        next();
       }
+    };
+    processing.forEach(function(item){
+      item.cmd(iterator);
     });
 // async.each(processing, function(item, cb) {
 // item.cmd(cb);
