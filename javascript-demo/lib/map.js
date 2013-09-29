@@ -92,8 +92,9 @@ function syncCmd(name, callback) {
   });
 }
 
+function noop(){}
 function asyncEach(arr, iterator, callback){
-  callback = callback || function(){};
+  callback = callback || noop;
   
   if(!arr.length){
     return callback();
@@ -101,10 +102,15 @@ function asyncEach(arr, iterator, callback){
   
   var completed = 0;
   arr.forEach(function(item){
-    iterator(item, function(){
+    iterator(item, function(err){
       completed ++ ;
-      if(completed >= arr.length){
-        callback();
+      if(err){
+        callback(err);
+        callback = noop;
+      }else{
+        if(completed >= arr.length){
+          callback(null);
+        }
       }
     });
   });
