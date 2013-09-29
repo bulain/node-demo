@@ -37,7 +37,7 @@ Map.prototype.processQueue = function() {
 Map.prototype.renderBaseMap = function(baseMap) {
   this.queue.push({
     lvl : 0,
-    cmd : asyncCmd.bind(this, 'renderBaseMap', 1000)
+    cmd : asyncCmd.bind(this, 'renderBaseMap')
   });
   this.processQueue();
 };
@@ -45,7 +45,7 @@ Map.prototype.renderBaseMap = function(baseMap) {
 Map.prototype.addLayer = function(layer, autoAdjust) {
   this.queue.push({
     lvl : 1,
-    cmd : asyncCmd.bind(this, layer, Math.ceil(Math.random() * 1000))
+    cmd : asyncCmd.bind(this, layer)
   });
   this.processQueue();
 };
@@ -53,7 +53,7 @@ Map.prototype.addLayer = function(layer, autoAdjust) {
 Map.prototype.removeLayer = function(layer) {
   this.queue.push({
     lvl : 2,
-    cmd : asyncCmd.bind(this, layer, 10)
+    cmd : asyncCmd.bind(this, layer)
   });
   this.processQueue();
 };
@@ -71,7 +71,8 @@ Map.prototype.ready = function(fn) {
 }
 
 // mock methods
-function asyncCmd(name, timeout, callback) {
+function asyncCmd(name, callback) {
+  var timeout = Math.ceil(Math.random() * 1000);
   setTimeout(function() {
     console.log('asyncCmd-' + name + '-' + timeout);
     callback(null);
