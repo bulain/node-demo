@@ -11,6 +11,7 @@ Map.prototype.processQueue = function() {
   var processing = [];
   var lvl = 10;
   var obj;
+  var that = this;
   
   while (this.processed && this.queue.length && (obj = this.queue[0], obj.lvl <= lvl)) {
     lvl = obj.lvl;
@@ -18,7 +19,6 @@ Map.prototype.processQueue = function() {
   }
 
   if (processing.length) {
-    var that = this;
     this.processed = false;
     var count = processing.length;
     var next = function(){
