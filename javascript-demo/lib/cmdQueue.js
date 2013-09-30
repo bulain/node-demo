@@ -33,8 +33,10 @@ CmdQueue.prototype._processQueue = function(){
       that._processQueue();
     });
   } else if (!this._queue.length) {
-    while (this._fns.length) {
-      var fn = this._fns.shift();
+    var fns = this._fns.slice();
+    this._fns.length = 0;
+    while (fns.length) {
+      var fn = fns.shift();
       fn.call();
     }
   }
