@@ -10,7 +10,11 @@ CmdQueue.prototype.pushCmd = function(cmd){
 };
 
 CmdQueue.prototype.pushFn = function(fn){
-  this._fns.push(fn);
+  if (this._queue.length) {
+    this._fns.push(fn);
+  } else {
+    fn();
+  }
 };
 
 CmdQueue.prototype._processQueue = function(){
@@ -19,8 +23,8 @@ CmdQueue.prototype._processQueue = function(){
   var obj;
   var that = this;
   
-  while (this._processed && this._queue.length && (obj = this._queue[0], obj.lvl <= lvl)) {
-    lvl = obj.lvl;
+  while (this._processed && this._queue.length && this._queue[0].lvl <= lvl) {
+    lvl = this._queue[0].lvl;
     processing.push(this._queue.shift());
   }
 
