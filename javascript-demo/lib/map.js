@@ -1,6 +1,7 @@
 var CmdQueue = require('./cmdQueue');
 
 var Map = function() {
+  this._cmds = [];
   this._cmdQueue = new CmdQueue();
   this.renderBaseMap();
 };
@@ -9,6 +10,13 @@ Map.prototype.renderBaseMap = function(baseMap) {
   this._cmdQueue.pushCmd({
     lvl : 0,
     cmd : asyncCmd.bind(this, 'renderBaseMap')
+  });
+};
+
+Map.prototype.bounds = function(bounds) {
+  this._cmdQueue.pushCmd({
+    lvl : 0,
+    cmd : asyncCmd.bind(this, "bounds")
   });
 };
 
@@ -28,7 +36,7 @@ Map.prototype.removeLayer = function(layer) {
 
 Map.prototype.destory = function() {
   this._cmdQueue.pushCmd({
-    lvl : 3,
+    lvl : 0,
     cmd : syncCmd.bind(this, 'destory')
   });
 };
@@ -39,16 +47,16 @@ Map.prototype.ready = function(fn) {
 
 // mock methods
 function asyncCmd(name, callback) {
-  var timeout = Math.ceil(Math.random() * 1000);
+  var timeout = Math.ceil(Math.random() * 10);
   setTimeout(function() {
-    console.log('asyncCmd-' + name + '-' + timeout);
-    callback(null);
-  }, timeout);
+    this._cmds.push(name);
+    callback();
+  }.bind(this), timeout);
 }
 
 function syncCmd(name, callback) {
-  console.log('syncCmd-' + name);
-  callback(null);
+  this._cmds.push(name);
+  callback();
 }
 
 module.exports = Map;
