@@ -1,71 +1,40 @@
+var CmdQueue = require('./cmdQueue');
+
 var Map = function() {
-  this.queue = [];
-  this.fns = [];
-  this.processed = true;
+  this._cmdQueue = new CmdQueue();
   this.renderBaseMap();
 };
 
-Map.prototype.processQueue = function() {
-  var processing = [];
-  var lvl = 10;
-  var obj;
-  var that = this;
-  
-  while (this.processed && this.queue.length && (obj = this.queue[0], obj.lvl <= lvl)) {
-    lvl = obj.lvl;
-    processing.push(this.queue.shift());
-  }
-
-  if (processing.length) {
-    this.processed = false;
-    asyncEach(processing, function(item, cb) {
-      item.cmd(cb);
-    }, function(err) {
-      that.processed = true;
-      that.processQueue();
-    });
-  } else if (!this.queue.length) {
-    while (this.fns.length) {
-      var fn = this.fns.shift();
-      fn.call();
-    }
-  }
-};
-
 Map.prototype.renderBaseMap = function(baseMap) {
-  this.queue.push({
+  this._cmdQueue.pushCmd({
     lvl : 0,
     cmd : asyncCmd.bind(this, 'renderBaseMap')
   });
-  this.processQueue();
 };
 
 Map.prototype.addLayer = function(layer, autoAdjust) {
-  this.queue.push({
+  this._cmdQueue.pushCmd({
     lvl : 1,
     cmd : asyncCmd.bind(this, layer)
   });
-  this.processQueue();
 };
 
 Map.prototype.removeLayer = function(layer) {
-  this.queue.push({
+  this._cmdQueue.pushCmd({
     lvl : 2,
     cmd : asyncCmd.bind(this, layer)
   });
-  this.processQueue();
 };
 
 Map.prototype.destory = function() {
-  this.queue.push({
+  this._cmdQueue.pushCmd({
     lvl : 3,
     cmd : syncCmd.bind(this, 'destory')
   });
-  this.processQueue();
 };
 
 Map.prototype.ready = function(fn) {
-  this.fns.push(fn.bind(this));
+  this._cmdQueue.pushFn(fn.bind(this));
 }
 
 // mock methods
@@ -78,34 +47,8 @@ function asyncCmd(name, callback) {
 }
 
 function syncCmd(name, callback) {
-  setTimeout(function() {
-    console.log('syncCmd-' + name);
-    callback(null);
-  });
-}
-
-function noop(){}
-function asyncEach(arr, iterator, callback){
-  callback = callback || noop;
-  
-  if(!arr.length){
-    return callback();
-  }
-  
-  var completed = 0;
-  arr.forEach(function(item){
-    iterator(item, function(err){
-      completed ++ ;
-      if(err){
-        callback(err);
-        callback = noop;
-      }else{
-        if(completed >= arr.length){
-          callback(null);
-        }
-      }
-    });
-  });
+  console.log('syncCmd-' + name);
+  callback(null);
 }
 
 module.exports = Map;
