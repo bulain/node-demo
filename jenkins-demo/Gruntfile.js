@@ -1,7 +1,7 @@
 module.exports = function(grunt) {
   grunt.initConfig({
-    clean: {
-      target: ['target'],
+    clean : {
+      target : ['target'],
     },
     jshint : {
       all : ['Gruntfile.js', 'lib/*.js'],
@@ -9,11 +9,19 @@ module.exports = function(grunt) {
         eqnull : true
       },
     },
+    jsdoc : {
+      dist : {
+        src : ['lib/*.js', 'test/*.js'],
+        options : {
+          destination : 'target/doc'
+        }
+      }
+    },
     shell : {
       options : {
         stdout : true,
         stderr : true,
-        failOnError: true
+        failOnError : true
       },
       mocha : {
         command : './node_modules/.bin/mocha --reporter tap'
@@ -28,6 +36,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-shell');
+  grunt.loadNpmTasks('grunt-jsdoc');
 
   grunt.registerTask('default', ['jshint']);
   grunt.registerTask('test', ['jshint', 'shell:mocha']);
