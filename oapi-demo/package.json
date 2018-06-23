@@ -1,0 +1,26 @@
+{
+  "name": "oapi-demo",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "pm2 start app.json --env dev --watch ",
+    "prod": "pm2 start app.json --env production",
+    "stop": "pm2 stop app.json"
+  },
+  "dependencies": {
+    "async": "^2.6.1",
+    "db-migrate": "^0.11.1",
+    "debug": "~2.6.9",
+    "express": "~4.16.0",
+    "http-errors": "~1.6.2",
+    "mocha": "^5.2.0",
+    "moment": "^2.22.2",
+    "mongodb": "^3.0.10",
+    "morgan": "~1.9.0",
+    "mysql": "^2.15.0",
+    "pm2": "^2.10.4"
+  },
+  "devDependencies": {
+    "eslint": "^5.0.0"
+  }
+}
