@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "pm2 start app.json --env dev --watch ",
     "prod": "pm2 start app.json --env production",
-    "stop": "pm2 stop app.json"
+    "stop": "pm2 stop app.json",
+    "test": "mocha"
   },
   "dependencies": {
     "async": "^2.6.1",

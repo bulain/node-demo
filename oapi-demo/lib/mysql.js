@@ -1,15 +1,28 @@
 'use strict';
 const mysql = require('mysql');
 
-var pool = mysql.createPool({
-    connectionLimit: 50,
-    host: 'localhost',
-    port: '3306',
-    user: 'oapi',
-    password: 'oapi',
-    database: 'oapi',
-    multipleStatements: true  //是否允许执行多条sql语句
-});
+var pool = null;
+
+//创建连接池
+var setup = () => {
+    if (pool) return;
+    pool = mysql.createPool({
+        connectionLimit: 50,
+        host: 'localhost',
+        port: '3306',
+        user: 'oapi',
+        password: 'oapi',
+        database: 'oapi',
+        multipleStatements: true  //是否允许执行多条sql语句
+    });
+};
+setup();
+
+//关闭连接池
+var shutdown = () => {
+    pool.end();
+    pool = null;
+};
 
 //将结果已对象数组返回
 var row = (sql, ...params) => {
@@ -94,6 +107,8 @@ var execute = (sql, ...params) => {
 
 //模块导出
 module.exports = {
+    setup: setup,
+    shutdown: shutdown,
     row: row,
     first: first,
     single: single,
