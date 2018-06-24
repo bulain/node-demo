@@ -7,18 +7,15 @@ const dbname = 'oapi';
 
 let database = async function () {
     if (global._db) return global._db;
-    try {
-        let client = await MongoClient.connect(url, {
-            native_parser: false,
-            poolSize: 50,
-            noDelay: false,
-            autoReconnect: true
-        });
-        global._db = client.db(dbname);
-    } catch (err) {
+    let client = await MongoClient.connect(url, {
+        native_parser: false,
+        poolSize: 50,
+        noDelay: false,
+        autoReconnect: true
+    }).catch(function (err) {
         console.log(err);
-    }
-    return global._db;
+    });
+    return global._db = client.db(dbname);
 };
 
 // 初始化数据库连接
