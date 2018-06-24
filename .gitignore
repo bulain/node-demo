@@ -4,3 +4,4 @@ target/
 built.js
 built.css
 *.log
+package-lock.json
