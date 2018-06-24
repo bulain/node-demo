@@ -10,9 +10,9 @@ var usersRouter = require('./routes/users');
 var app = express();
 
 // logger
-var logDirectory = path.join(__dirname, 'logs')
-fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory)
-var accessLogStream = fs.createWriteStream(path.join(logDirectory, 'access.log'), { flags: 'a' })
+//var logDirectory = path.join(__dirname, 'logs')
+//fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory)
+//var accessLogStream = fs.createWriteStream(path.join(logDirectory, 'access.log'), { flags: 'a' })
 //app.use(logger('common', {stream: accessLogStream}))
 app.use(logger('dev'));
 app.use(express.json());
