@@ -14,13 +14,15 @@ var setup = () => {
     if (client) return client;
     client = redis.createClient(opt);
     client.on("error", function (err) {
-        console.log("Error " + err);
+        console.log(err);
     });
+    if (opt.password) client.auth(opt.password);
     return client;
 };
 
 //关闭连接池
 var shutdown = () => {
+    client.end(true);
     client.quit();
     client = null;
 };
