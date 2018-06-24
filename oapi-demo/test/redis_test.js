@@ -12,14 +12,14 @@ after(function () {
 });
 
 describe('redis', function () {
-    describe('#set & get()', function () {
+    describe('#set() & get()', function () {
         it('should work', async function () {
             client.set('k1', 'v1');
             var v = await client.getAsync('k1');
             assert.equal(v, 'v1');
         });
     })
-    describe('#hset & hget()', function () {
+    describe('#hset() & hget()', function () {
         it('should work', async function () {
             client.hset('hk1', 'k1', 'v1');
             var v = await client.hgetAsync('hk1', 'k1');
