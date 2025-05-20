@@ -6,6 +6,6 @@
     "start": "node index.js"
   },
   "dependencies": {
-	"formidable": "1.0.14"
+	"formidable": "3.5.4"
   }
 }

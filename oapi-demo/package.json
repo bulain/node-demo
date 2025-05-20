@@ -9,23 +9,23 @@
     "test": "mocha"
   },
   "dependencies": {
-    "async": "^2.6.1",
-    "bluebird": "^3.5.1",
-    "db-migrate": "^0.11.1",
-    "db-migrate-mongodb": "^1.4.0",
-    "db-migrate-mysql": "^1.1.10",
-    "debug": "~2.6.9",
-    "express": "~4.16.0",
-    "http-errors": "~1.6.2",
-    "mocha": "^5.2.0",
-    "moment": "^2.22.2",
-    "mongodb": "^3.0.10",
-    "morgan": "~1.9.0",
-    "mysql": "^2.15.0",
-    "pm2": "^2.10.4",
-    "redis": "^2.8.0"
+    "async": "^3.2.6",
+    "bluebird": "^3.7.2",
+    "db-migrate": "^0.11.14",
+    "db-migrate-mongodb": "^1.5.0",
+    "db-migrate-mysql": "^3.0.0",
+    "debug": "~4.4.1",
+    "express": "~5.1.0",
+    "http-errors": "~2.0.0",
+    "mocha": "^11.4.0",
+    "moment": "^2.30.1",
+    "mongodb": "^6.16.0",
+    "morgan": "~1.10.0",
+    "mysql": "^2.18.1",
+    "pm2": "^6.0.6",
+    "redis": "^5.0.1"
   },
   "devDependencies": {
-    "eslint": "^5.0.0"
+    "eslint": "^9.27.0"
   }
 }

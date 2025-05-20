@@ -6,18 +6,18 @@
     "test": "./node_modules/grunt-cli/bin/grunt test"
   },
   "dependencies": {
-    "async": "0.2.8",
-    "mocha": "1.9.0",
-    "should": "1.2.2"
+    "async": "3.2.6",
+    "mocha": "11.4.0",
+    "should": "13.2.3"
   },
   "devDependencies": {
-    "jsdoc": "~3.2.0",
-    "grunt": "~0.4.1",
-    "grunt-contrib-jshint": "~0.6.3",
-    "grunt-contrib-clean": "~0.5.0",
-    "grunt-contrib-concat": "~0.3.0",
-    "grunt-shell": "~0.3.1",
-    "grunt-cli": "~0.1.9",
-    "grunt-jsdoc": "~0.4.1"
+    "jsdoc": "~4.0.4",
+    "grunt": "~1.6.1",
+    "grunt-contrib-jshint": "~3.2.0",
+    "grunt-contrib-clean": "~2.0.1",
+    "grunt-contrib-concat": "~2.1.0",
+    "grunt-shell": "~4.0.0",
+    "grunt-cli": "~1.5.0",
+    "grunt-jsdoc": "~2.4.1"
   }
 }
