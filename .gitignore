@@ -1,4 +1,7 @@
 .project
 node_modules/
 .idea/
+dist/
 *.log
+package-lock.json
+pnpm-lock.yaml
